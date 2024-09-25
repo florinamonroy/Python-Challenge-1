@@ -171,43 +171,55 @@ while place_order:
         # 5. Check the customer's input
         if keep_ordering == "y":
                 # Keep ordering
-                
+                place_order = True
                 # Exit the keep ordering question loop
-
+                break
+        elif keep_ordering == "n":
+                place_order = False
                 # Complete the order
-
+                
                 # Since the customer decided to stop ordering, thank them for
                 # their order
-
+                print("Thank you for your order!")
                 # Exit the keep ordering question loop
-
-
+                break
+        else:
                 # Tell the customer to try again
+                print("I did not understand your response. Please try again.")
 
 
 # Print out the customer's order
 print("This is what we are preparing for you.\n")
 
 # Uncomment the following line to check the structure of the order
-#print(order)
+print(order_list)
+print()
 
-print("Item name                 | Price  | Quantity")
-print("--------------------------|--------|----------")
+print("Item name                 | Price        | Quantity")
+print("--------------------------|--------------|----------")
 
 # 6. Loop through the items in the customer's order
-
+for order in order_list:
     # 7. Store the dictionary items as variables
-
+    item_name = order["Item_name"]
+    item_price = order["Price"]
+    quantity = order["Quantity"]
 
     # 8. Calculate the number of spaces for formatted printing
-
+    num_item_spaces = 26 - len(item_name)
+    num_price_spaces = 8
 
     # 9. Create space strings
-
+    item_spaces = " " * num_item_spaces
+    price_spaces = " " * num_price_spaces
 
     # 10. Print the item name, price, and quantity
-
+    print(f"{item_name}{item_spaces}| ${item_price:.2f}{price_spaces}| {quantity}")
 
 # 11. Calculate the cost of the order using list comprehension
+
 # Multiply the price by quantity for each item in the order list, then sum()
 # and print the prices.
+total_cost = sum(order["Price"] * order["Quantity"] for order in order_list)
+print(f"\nTotal cost of your order: ${total_cost:.2f}")
+print()
